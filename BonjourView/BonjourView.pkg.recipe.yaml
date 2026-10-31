@@ -1,13 +1,19 @@
-Description: Downloads the latest BonjourView release and builds a flat installer package from the app.
+Description: Downloads the latest BonjourView release, builds a flat installer package from the app, and signs it with a Developer ID Installer identity.
 Identifier: com.github.hov172.pkg.BonjourView
 MinimumVersion: "2.3"
 ParentRecipe: com.github.hov172.download.BonjourView
 
 Input:
   NAME: BonjourView
+  SIGNING_IDENTITY: "Developer ID Installer: Jesus Ayala (N859JA9UCJ)"
 
 Process:
   - Processor: AppPkgCreator
     Arguments:
       app_path: "%found_filename%"
       pkg_path: "%RECIPE_CACHE_DIR%/%NAME%-%version%.pkg"
+
+  - Processor: PkgSigner
+    Arguments:
+      pkg_path: "%pkg_path%"
+      signing_identity: "%SIGNING_IDENTITY%"

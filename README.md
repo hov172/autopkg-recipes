@@ -13,7 +13,7 @@ autopkg repo-add hov172/autopkg-recipes
 | Stash Video | `StashVideo.download`, `StashVideo.munki`, `StashVideo.jamf`, `StashVideo.intune` | [hov172/StashVideos](https://github.com/hov172/StashVideos) |
 | BonjourView | `BonjourView.download`, `BonjourView.pkg`, `BonjourView.munki`, `BonjourView.jamf`, `BonjourView.intune` | [hov172/BonjourView](https://github.com/hov172/BonjourView) |
 
-Every download recipe fetches the vendor's signed and notarized artifact straight from GitHub Releases and fails if the Developer ID signature does not match Team ID `N859JA9UCJ`. Stash Video ships a flat package, which is deployed as is. BonjourView ships a zipped app bundle, so its `.pkg` recipe wraps the verified app in a package with AutoPkg's `AppPkgCreator`.
+Every download recipe fetches the vendor's signed and notarized artifact straight from GitHub Releases and fails if the Developer ID signature does not match Team ID `N859JA9UCJ`. Stash Video ships a flat package, which is deployed as is. BonjourView ships a zipped app bundle, so its `.pkg` recipe wraps the verified app in a package with AutoPkg's `AppPkgCreator` and signs it with the `Developer ID Installer` identity named by `SIGNING_IDENTITY` (override it in a recipe override to use your own).
 
 ## Setup
 
