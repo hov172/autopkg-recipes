@@ -28,6 +28,7 @@ defaults write com.github.autopkg CLIENT_SECRET "..."
 
 # Microsoft Intune (for .intune recipes)
 autopkg repo-add almenscorner/intune-uploader
+/usr/local/autopkg/python -m pip install -r ~/Library/AutoPkg/RecipeRepos/com.github.almenscorner.intune-uploader/IntuneUploader/requirements.txt
 defaults write com.github.autopkg CLIENT_ID "..."
 defaults write com.github.autopkg CLIENT_SECRET "..."
 defaults write com.github.autopkg TENANT_ID "..."
