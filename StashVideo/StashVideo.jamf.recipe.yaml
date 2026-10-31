@@ -1,0 +1,19 @@
+Description: Downloads the latest Stash Video installer package and uploads it, with its icon, to Jamf Pro.
+Identifier: com.github.hov172.jamf.StashVideo
+MinimumVersion: "2.3"
+ParentRecipe: com.github.hov172.download.StashVideo
+
+Input:
+  NAME: StashVideo
+  CATEGORY: Utilities
+
+Process:
+  - Processor: com.github.grahampugh.jamf-upload.processors/JamfPackageUploader
+    Arguments:
+      pkg_path: "%pathname%"
+      pkg_category: "%CATEGORY%"
+      pkg_notes: Stash Video %version%. Signed and notarized by Ayala Solutions (N859JA9UCJ).
+
+  - Processor: com.github.grahampugh.jamf-upload.processors/JamfIconUploader
+    Arguments:
+      icon_file: "%RECIPE_DIR%/%NAME%.png"

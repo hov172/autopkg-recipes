@@ -1,0 +1,29 @@
+Description: Downloads the latest Stash Video installer package and uploads it, with its icon, to Microsoft Intune.
+Identifier: com.github.hov172.intune.StashVideo
+MinimumVersion: "2.3"
+ParentRecipe: com.github.hov172.download.StashVideo
+
+Input:
+  NAME: StashVideo
+  DISPLAY_NAME: Stash Video
+  PUBLISHER: Ayala Solutions
+  DESCRIPTION: Stash Video downloads and trims video from the web. Bundles yt-dlp and ffmpeg; no extra dependencies.
+  BUNDLE_ID: com.ayala.solutions.yt-dlp-gui-Macos
+  MINIMUM_OS: v15_0
+  CATEGORIES:
+    - Productivity
+
+Process:
+  - Processor: com.github.almenscorner.intune-upload.processors/IntuneAppUploader
+    Arguments:
+      app_file: "%pathname%"
+      displayname: "%DISPLAY_NAME%"
+      description: "%DESCRIPTION%"
+      publisher: "%PUBLISHER%"
+      developer: "%PUBLISHER%"
+      categories: "%CATEGORIES%"
+      information_url: https://github.com/hov172/StashVideos
+      bundleId: "%BUNDLE_ID%"
+      bundleVersion: "%version%"
+      minimumSupportedOperatingSystem: "%MINIMUM_OS%"
+      icon: "%RECIPE_DIR%/%NAME%.png"
