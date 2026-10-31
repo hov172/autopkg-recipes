@@ -9,7 +9,7 @@ Input:
   PUBLISHER: Ayala Solutions
   DESCRIPTION: Stash Video downloads and trims video from the web. Bundles yt-dlp and ffmpeg; no extra dependencies.
   BUNDLE_ID: com.ayala.solutions.yt-dlp-gui-Macos
-  MINIMUM_OS: v15_0
+  MINIMUM_OS: v14_0
   CATEGORIES:
     - Productivity
 
