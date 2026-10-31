@@ -48,6 +48,6 @@ autopkg run -v BonjourView.intune
 
 ## Stash Video notes
 
-- Requires macOS 26 or later.
+- Requires macOS 14 or later.
 - The installer also places `yt-dlp` and `ffmpeg` symlinks in `/usr/local/bin`.
 - A configuration profile that pre-approves the app's background helper is published with each release as `StashVideo-BackgroundItems.mobileconfig`. Deploy it alongside the package if you do not want users prompted for Background Items.

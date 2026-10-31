@@ -15,7 +15,7 @@ Input:
     developer: Ayala Solutions
     display_name: Stash Video
     name: "%NAME%"
-    minimum_os_version: "26.0"
+    minimum_os_version: "14.0"
     unattended_install: true
     unattended_uninstall: true
 
