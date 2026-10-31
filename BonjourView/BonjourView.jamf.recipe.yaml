@@ -1,0 +1,19 @@
+Description: Downloads the latest BonjourView release, packages it, and uploads it, with its icon, to Jamf Pro.
+Identifier: com.github.hov172.jamf.BonjourView
+MinimumVersion: "2.3"
+ParentRecipe: com.github.hov172.pkg.BonjourView
+
+Input:
+  NAME: BonjourView
+  CATEGORY: Utilities
+
+Process:
+  - Processor: com.github.grahampugh.jamf-upload.processors/JamfPackageUploader
+    Arguments:
+      pkg_path: "%pkg_path%"
+      pkg_category: "%CATEGORY%"
+      pkg_notes: BonjourView %version%. App signed and notarized by Ayala Solutions (N859JA9UCJ); package built by AutoPkg.
+
+  - Processor: com.github.grahampugh.jamf-upload.processors/JamfIconUploader
+    Arguments:
+      icon_file: "%RECIPE_DIR%/%NAME%.png"

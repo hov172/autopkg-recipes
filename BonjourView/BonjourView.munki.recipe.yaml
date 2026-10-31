@@ -1,0 +1,27 @@
+Description: Downloads the latest BonjourView release, packages it, and imports it into Munki.
+Identifier: com.github.hov172.munki.BonjourView
+MinimumVersion: "2.3"
+ParentRecipe: com.github.hov172.pkg.BonjourView
+
+Input:
+  NAME: BonjourView
+  MUNKI_REPO_SUBDIR: apps/%NAME%
+  MUNKI_CATALOG: testing
+  pkginfo:
+    catalogs:
+      - "%MUNKI_CATALOG%"
+    category: Utilities
+    description: Shows every Bonjour (mDNS / DNS-SD) service on the local network as it appears and disappears, identifies what each one is, and lets you open, copy or export what it finds.
+    developer: Ayala Solutions
+    display_name: BonjourView
+    name: "%NAME%"
+    minimum_os_version: "14.0"
+    unattended_install: true
+    unattended_uninstall: true
+
+Process:
+  - Processor: MunkiImporter
+    Arguments:
+      pkg_path: "%pkg_path%"
+      repo_subdirectory: "%MUNKI_REPO_SUBDIR%"
+      extract_icon: true

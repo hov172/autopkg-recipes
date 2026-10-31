@@ -1,0 +1,28 @@
+Description: Downloads the latest BonjourView release, packages it, and uploads it, with its icon, to Microsoft Intune.
+Identifier: com.github.hov172.intune.BonjourView
+MinimumVersion: "2.3"
+ParentRecipe: com.github.hov172.pkg.BonjourView
+
+Input:
+  NAME: BonjourView
+  DISPLAY_NAME: BonjourView
+  PUBLISHER: Ayala Solutions
+  DESCRIPTION: Shows every Bonjour (mDNS / DNS-SD) service on the local network as it appears and disappears, identifies what each one is, and lets you open, copy or export what it finds.
+  MINIMUM_OS: v14_0
+  CATEGORIES:
+    - Productivity
+
+Process:
+  - Processor: com.github.almenscorner.intune-upload.processors/IntuneAppUploader
+    Arguments:
+      app_file: "%pkg_path%"
+      displayname: "%DISPLAY_NAME%"
+      description: "%DESCRIPTION%"
+      publisher: "%PUBLISHER%"
+      developer: "%PUBLISHER%"
+      categories: "%CATEGORIES%"
+      information_url: https://github.com/hov172/BonjourView
+      bundleId: "%bundleid%"
+      bundleVersion: "%version%"
+      minimumSupportedOperatingSystem: "%MINIMUM_OS%"
+      icon: "%RECIPE_DIR%/%NAME%.png"

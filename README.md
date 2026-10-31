@@ -11,8 +11,9 @@ autopkg repo-add hov172/autopkg-recipes
 | App | Recipes | Source |
 |-----|---------|--------|
 | Stash Video | `StashVideo.download`, `StashVideo.munki`, `StashVideo.jamf`, `StashVideo.intune` | [hov172/StashVideos](https://github.com/hov172/StashVideos) |
+| BonjourView | `BonjourView.download`, `BonjourView.pkg`, `BonjourView.munki`, `BonjourView.jamf`, `BonjourView.intune` | [hov172/BonjourView](https://github.com/hov172/BonjourView) |
 
-Every recipe downloads the vendor's signed and notarized installer package straight from GitHub Releases. No repackaging happens on your machine, so the artifact you deploy is byte-for-byte what the vendor shipped. The download recipe fails if the Developer ID Installer signature does not match Team ID `N859JA9UCJ`.
+Every download recipe fetches the vendor's signed and notarized artifact straight from GitHub Releases and fails if the Developer ID signature does not match Team ID `N859JA9UCJ`. Stash Video ships a flat package, which is deployed as is. BonjourView ships a zipped app bundle, so its `.pkg` recipe wraps the verified app in a package with AutoPkg's `AppPkgCreator`.
 
 ## Setup
 
@@ -41,8 +42,8 @@ Munki recipes need the Munki tools installed (`makepkginfo`) and `MUNKI_REPO` se
 ```bash
 autopkg make-override StashVideo.munki.recipe.yaml   # recommended: pin trust info
 autopkg run -v StashVideo.munki
-autopkg run -v StashVideo.jamf
-autopkg run -v StashVideo.intune
+autopkg run -v BonjourView.jamf
+autopkg run -v BonjourView.intune
 ```
 
 ## Stash Video notes

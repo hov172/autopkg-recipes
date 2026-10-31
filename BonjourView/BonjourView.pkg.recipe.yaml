@@ -1,0 +1,13 @@
+Description: Downloads the latest BonjourView release and builds a flat installer package from the app.
+Identifier: com.github.hov172.pkg.BonjourView
+MinimumVersion: "2.3"
+ParentRecipe: com.github.hov172.download.BonjourView
+
+Input:
+  NAME: BonjourView
+
+Process:
+  - Processor: AppPkgCreator
+    Arguments:
+      app_path: "%found_filename%"
+      pkg_path: "%RECIPE_CACHE_DIR%/%NAME%-%version%.pkg"

@@ -1,0 +1,46 @@
+Description: Downloads the latest BonjourView release zip from GitHub Releases and verifies the app's Developer ID signature.
+Identifier: com.github.hov172.download.BonjourView
+MinimumVersion: "2.3"
+
+Input:
+  NAME: BonjourView
+  GITHUB_REPO: hov172/BonjourView
+  # v3.0.0 shipped as Bonjeff-<ver>.zip; later releases ship as BonjourView-<ver>.zip.
+  ASSET_REGEX: ^(BonjourView|Bonjeff)-[0-9.]+\.zip$
+
+Process:
+  - Processor: GitHubReleasesInfoProvider
+    Arguments:
+      github_repo: "%GITHUB_REPO%"
+      asset_regex: "%ASSET_REGEX%"
+
+  - Processor: URLDownloader
+    Arguments:
+      url: "%url%"
+      filename: "%NAME%-%version%.zip"
+
+  - Processor: EndOfCheckPhase
+
+  - Processor: Unarchiver
+    Arguments:
+      archive_path: "%pathname%"
+      destination_path: "%RECIPE_CACHE_DIR%/%NAME%"
+      purge_destination: true
+
+  - Processor: FileFinder
+    Arguments:
+      pattern: "%RECIPE_CACHE_DIR%/%NAME%/*.app"
+
+  - Processor: CodeSignatureVerifier
+    Arguments:
+      input_path: "%found_filename%"
+      # Developer ID, Team ID N859JA9UCJ. No bundle identifier so it matches
+      # both the Bonjeff-era and BonjourView builds.
+      requirement: anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = N859JA9UCJ
+
+  - Processor: PlistReader
+    Arguments:
+      info_path: "%found_filename%/Contents/Info.plist"
+      plist_keys:
+        CFBundleIdentifier: bundleid
+        CFBundleShortVersionString: version
