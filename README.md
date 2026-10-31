@@ -53,6 +53,11 @@ autopkg run -v BonjourView.intune
 - The app updates itself and is also distributed through Homebrew, so the Munki pkginfo detects the installed version from the app bundle, not the package receipt. A copy that is already current or newer is left alone however it was installed.
 - Installs a login agent and the DisplayHelp Updater helper. Deploy the `DisplayHelp-BackgroundItems.mobileconfig` published with each release so standard users are not prompted to approve them.
 
+## BonjourView notes
+
+- Requires macOS 14 or later.
+- Releases ship a zipped app, so the `.pkg` recipe wraps it in a package. The Munki pkginfo detects the installed version from the app bundle, so a copy dragged in from the release dmg counts as installed.
+
 ## Stash Video notes
 
 - Requires macOS 14 or later.

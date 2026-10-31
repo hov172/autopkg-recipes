@@ -20,6 +20,19 @@ Input:
     unattended_uninstall: true
 
 Process:
+  # Detect by the app bundle rather than the pkg receipt, so a copy dragged in
+  # from the release dmg counts as installed and a newer one is never downgraded.
+  # bundleid and version come from PlistReader in the download recipe.
+  - Processor: MunkiPkginfoMerger
+    Arguments:
+      additional_pkginfo:
+        installs:
+          - type: application
+            path: /Applications/%NAME%.app
+            CFBundleIdentifier: "%bundleid%"
+            CFBundleShortVersionString: "%version%"
+            version_comparison_key: CFBundleShortVersionString
+
   - Processor: MunkiImporter
     Arguments:
       pkg_path: "%pkg_path%"
