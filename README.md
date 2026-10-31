@@ -35,7 +35,7 @@ defaults write com.github.autopkg CLIENT_SECRET "..."
 defaults write com.github.autopkg TENANT_ID "..."
 ```
 
-Munki recipes need the Munki tools installed (`makepkginfo`) and `MUNKI_REPO` set.
+Munki recipes need the Munki tools installed (`makepkginfo`) and `MUNKI_REPO` set. If you remove an item from the repo by hand and want to re-import the same version, delete `catalogs/all` before running the recipe: Munki 7.4.1's `makecatalogs` does not rewrite `all` when it empties out, and `MunkiImporter` reads that catalog to decide an item already exists.
 
 ## Run
 
