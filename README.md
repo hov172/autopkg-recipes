@@ -6,6 +6,8 @@ AutoPkg recipes for apps published by Ayala Solutions. Add the repo once and eve
 autopkg repo-add hov172/autopkg-recipes
 ```
 
+That short form is all AutoPkg needs: it expands to `https://github.com/hov172/autopkg-recipes` on its own, and the repo is public, so no GitHub account is required.
+
 ## Apps
 
 | App | Recipes | Source |
