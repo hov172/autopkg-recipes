@@ -24,4 +24,4 @@ Process:
     Arguments:
       pkg_path: "%pathname%"
       repo_subdirectory: "%MUNKI_REPO_SUBDIR%"
-      icon_path: "%RECIPE_DIR%/%NAME%.png"
+      extract_icon: true
