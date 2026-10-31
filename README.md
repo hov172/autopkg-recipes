@@ -50,10 +50,12 @@ autopkg run -v BonjourView.intune
 ## DisplayHelp notes
 
 - Requires macOS 14 or later.
+- The app updates itself and is also distributed through Homebrew, so the Munki pkginfo detects the installed version from the app bundle, not the package receipt. A copy that is already current or newer is left alone however it was installed.
 - Installs a login agent and the DisplayHelp Updater helper. Deploy the `DisplayHelp-BackgroundItems.mobileconfig` published with each release so standard users are not prompted to approve them.
 
 ## Stash Video notes
 
 - Requires macOS 14 or later.
+- The app updates itself (Settings > Updates) and is also distributed through Homebrew, so the Munki pkginfo detects the installed version from the app bundle, not the package receipt.
 - The installer also places `yt-dlp` and `ffmpeg` symlinks in `/usr/local/bin`.
 - A configuration profile that pre-approves the app's background helper is published with each release as `StashVideo-BackgroundItems.mobileconfig`. Deploy it alongside the package if you do not want users prompted for Background Items.

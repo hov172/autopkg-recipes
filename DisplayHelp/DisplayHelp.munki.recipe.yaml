@@ -20,6 +20,19 @@ Input:
     unattended_uninstall: true
 
 Process:
+  # DisplayHelp updates itself and is also installed by Homebrew, so key the
+  # installed check on the app bundle rather than the pkg receipt. Munki then
+  # leaves a current or newer copy alone however it got there.
+  - Processor: MunkiPkginfoMerger
+    Arguments:
+      additional_pkginfo:
+        installs:
+          - type: application
+            path: /Applications/DisplayHelp.app
+            CFBundleIdentifier: com.displayhelp.app
+            CFBundleShortVersionString: "%version%"
+            version_comparison_key: CFBundleShortVersionString
+
   - Processor: MunkiImporter
     Arguments:
       pkg_path: "%pathname%"

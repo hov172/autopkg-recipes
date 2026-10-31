@@ -16,7 +16,7 @@ Process:
   - Processor: URLDownloader
     Arguments:
       url: "%url%"
-      filename: "%NAME%-%version%.pkg"
+      filename: "%NAME%.pkg"
 
   - Processor: EndOfCheckPhase
 
