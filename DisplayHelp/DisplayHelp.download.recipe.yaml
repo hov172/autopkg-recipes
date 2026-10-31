@@ -1,0 +1,29 @@
+Description: Downloads the latest signed, notarized DisplayHelp installer package from GitHub Releases and verifies its Developer ID signature.
+Identifier: com.github.hov172.download.DisplayHelp
+MinimumVersion: "2.3"
+
+Input:
+  NAME: DisplayHelp
+  GITHUB_REPO: hov172/DisplayHelp
+  ASSET_REGEX: ^DisplayHelp-[0-9.]+\.pkg$
+
+Process:
+  - Processor: GitHubReleasesInfoProvider
+    Arguments:
+      github_repo: "%GITHUB_REPO%"
+      asset_regex: "%ASSET_REGEX%"
+
+  - Processor: URLDownloader
+    Arguments:
+      url: "%url%"
+      filename: "%NAME%-%version%.pkg"
+
+  - Processor: EndOfCheckPhase
+
+  - Processor: CodeSignatureVerifier
+    Arguments:
+      input_path: "%pathname%"
+      expected_authority_names:
+        - "Developer ID Installer: Jesus Ayala (N859JA9UCJ)"
+        - Developer ID Certification Authority
+        - Apple Root CA

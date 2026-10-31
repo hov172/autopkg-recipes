@@ -1,0 +1,27 @@
+Description: Downloads the latest DisplayHelp installer package and imports it into Munki.
+Identifier: com.github.hov172.munki.DisplayHelp
+MinimumVersion: "2.3"
+ParentRecipe: com.github.hov172.download.DisplayHelp
+
+Input:
+  NAME: DisplayHelp
+  MUNKI_REPO_SUBDIR: apps/%NAME%
+  MUNKI_CATALOG: testing
+  pkginfo:
+    catalogs:
+      - "%MUNKI_CATALOG%"
+    category: Utilities
+    description: DisplayHelp fixes common classroom and conference-room display problems from the menu bar, with one-click fixes and admin-defined Custom Fixes.
+    developer: Ayala Solutions
+    display_name: DisplayHelp
+    name: "%NAME%"
+    minimum_os_version: "14.0"
+    unattended_install: true
+    unattended_uninstall: true
+
+Process:
+  - Processor: MunkiImporter
+    Arguments:
+      pkg_path: "%pathname%"
+      repo_subdirectory: "%MUNKI_REPO_SUBDIR%"
+      extract_icon: true

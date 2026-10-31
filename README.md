@@ -11,9 +11,10 @@ autopkg repo-add hov172/autopkg-recipes
 | App | Recipes | Source |
 |-----|---------|--------|
 | Stash Video | `StashVideo.download`, `StashVideo.munki`, `StashVideo.jamf`, `StashVideo.intune` | [hov172/StashVideos](https://github.com/hov172/StashVideos) |
+| DisplayHelp | `DisplayHelp.download`, `DisplayHelp.munki`, `DisplayHelp.jamf`, `DisplayHelp.intune` | [hov172/DisplayHelp](https://github.com/hov172/DisplayHelp) |
 | BonjourView | `BonjourView.download`, `BonjourView.pkg`, `BonjourView.munki`, `BonjourView.jamf`, `BonjourView.intune` | [hov172/BonjourView](https://github.com/hov172/BonjourView) |
 
-Every download recipe fetches the vendor's signed and notarized artifact straight from GitHub Releases and fails if the Developer ID signature does not match Team ID `N859JA9UCJ`. Stash Video ships a flat package, which is deployed as is. BonjourView ships a zipped app bundle, so its `.pkg` recipe wraps the verified app in a package with AutoPkg's `AppPkgCreator` and signs it with the `Developer ID Installer` identity named by `SIGNING_IDENTITY` (override it in a recipe override to use your own).
+Every download recipe fetches the vendor's signed and notarized artifact straight from GitHub Releases and fails if the Developer ID signature does not match Team ID `N859JA9UCJ`. Stash Video and DisplayHelp ship flat packages, which are deployed as is. BonjourView ships a zipped app bundle, so its `.pkg` recipe wraps the verified app in a package with AutoPkg's `AppPkgCreator` and signs it with the `Developer ID Installer` identity named by `SIGNING_IDENTITY` (override it in a recipe override to use your own).
 
 ## Setup
 
@@ -45,6 +46,11 @@ autopkg run -v StashVideo.munki
 autopkg run -v BonjourView.jamf
 autopkg run -v BonjourView.intune
 ```
+
+## DisplayHelp notes
+
+- Requires macOS 14 or later.
+- Installs a login agent and the DisplayHelp Updater helper. Deploy the `DisplayHelp-BackgroundItems.mobileconfig` published with each release so standard users are not prompted to approve them.
 
 ## Stash Video notes
 
